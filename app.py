@@ -99,15 +99,21 @@ def main():
             str_loc = "WindGustDir_"+wind_gust_dir
             dt[str_loc] = 1
 
+            dt["WindGustSpeed"] = st.number_input("Скорость самого сильного порыва ветра", 0, 100)
+
             wind_dir9 = st.selectbox("Направление ветра в 9 утра", ['W', 'WNW', 'WSW', 'NE', 'NNW', 'N', 'NNE', 'SW' 'ENE',
        'SSE', 'S', 'NW', 'SE', 'ESE', 'E', 'SSW'])
             str_loc = "WindDir9am_"+wind_dir9
             dt[str_loc] = 1
 
+            dt["WindSpeed9am"] = st.number_input("Скорость ветра в 9 утра", 0, 100)
+
             wind_dir3 = st.selectbox("Направление ветра в 3 часа дня", ['W', 'WNW', 'WSW', 'NE', 'NNW', 'N', 'NNE', 'SW','ENE',
        'SSE', 'S', 'NW', 'SE', 'ESE', 'E', 'SSW'])
             str_loc = "WindDir3pm_"+wind_dir3
             dt[str_loc] = 1
+
+            dt["WindSpeed3pm"] = st.number_input("Скорость ветра в 3 часа дня", 0, 100)
 
             dt["Humidity9am"] = st.number_input("Влажность в 9 утра", 0, 100)
 
@@ -125,7 +131,6 @@ def main():
                 data = list(dt.values())
                 data = [int(str) for str in data]
                 data = np.array(data).reshape((1, -1))
-                print(data)
                 pred = model.predict(data)
                 st.write(f"Предсказанное значение: {pred[0]:.2f}")
             else:
